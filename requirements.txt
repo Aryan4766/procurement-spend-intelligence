@@ -1,0 +1,9 @@
+pandas>=2.1
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.4
+rapidfuzz>=3.5
+PyYAML>=6.0
+sentence-transformers>=3.0
+torch>=2.2
+pytest>=8.0

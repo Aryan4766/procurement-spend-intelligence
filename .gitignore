@@ -1,0 +1,114 @@
+# =====================================================================================
+# CONFIDENTIAL TASK DATA - must NEVER be committed (the assignment forbids it)
+# The raw data normally lives OUTSIDE this repo (../company_A, ../company_B); these rules
+# are a safety net in case it is copied inside.
+# =====================================================================================
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.parquet
+*.feather
+*.zip
+*.7z
+*.gz
+*.tar
+# Company data folders / typical raw file names (any depth, any case variant)
+company_A/
+company_B/
+company_C/
+company_a/
+company_b/
+company_c/
+data/
+datasets/
+raw/
+raw_data/
+private_data/
+erp_goods_receipts*
+invoice_tool_export*
+invoice_lines*
+labels_*
+seed_labels*
+taxonomy_[ABC]*
+fx_rates*
+output_template*
+
+# ---- the ONLY csv files that are meant to be published: the final A/B submission outputs
+!outputs/
+!outputs/*__A.csv
+!outputs/*__B.csv
+!submission/
+!submission/*__A.csv
+!submission/*__B.csv
+
+# =====================================================================================
+# Secrets / credentials
+# =====================================================================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+secrets*.json
+*.token
+.netrc
+
+# =====================================================================================
+# Models, caches, local experiment artefacts (re-created by the code)
+# =====================================================================================
+models/
+.cache/
+huggingface/
+*.pkl
+*.pickle
+*.joblib
+*.npy
+*.npz
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+*.ckpt
+reports/private/
+work/
+tmp/
+scratch/
+experiments_*/
+
+# =====================================================================================
+# Python / tooling
+# =====================================================================================
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+ENV/
+
+# =====================================================================================
+# Editors / OS / logs
+# =====================================================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+.claude/
+*.log
+*.tmp
+*.bak
+*.swp

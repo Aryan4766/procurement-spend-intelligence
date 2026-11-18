@@ -1,0 +1,7 @@
+leave-one-out reports/private/conf_features_A.npz: accuracy=0.240 mean_conf=0.606 ECE=0.366
+leave-one-out reports/private/conf_features_B.npz: accuracy=0.658 mean_conf=0.277 ECE=0.381
+reports/private/conf_features_A.npz: n=37029 accuracy=0.240 mean_conf=0.426 ECE=0.187 ranking AUC=0.646
+   reliability: [0.0,0.2): n=2728 conf=0.15 acc=0.07 | [0.2,0.4): n=16720 conf=0.32 acc=0.20 | [0.4,0.6): n=10089 conf=0.47 acc=0.20 | [0.6,0.8): n=7216 conf=0.71 acc=0.44 | [0.8,1.0): n=276 conf=0.81 acc=0.67
+reports/private/conf_features_B.npz: n=2547 accuracy=0.658 mean_conf=0.472 ECE=0.186 ranking AUC=0.776
+   reliability: [0.0,0.2): n=161 conf=0.14 acc=0.40 | [0.2,0.4): n=1124 conf=0.33 acc=0.45 | [0.4,0.6): n=458 conf=0.47 acc=0.72 | [0.6,0.8): n=763 conf=0.73 acc=0.97 | [0.8,1.0): n=41 conf=0.81 acc=1.00
+confidence_coefficients: {'intercept': -3.649, 'top': 4.889, 'margin': 0.104, 'agree': -0.626, 'info': 0.85}

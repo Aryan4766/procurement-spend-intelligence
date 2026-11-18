@@ -1,0 +1,155 @@
+{
+  "company": "A",
+  "generated_utc": "2026-11-18T09:45:46Z",
+  "records": 65549,
+  "mode": "zero_label",
+  "zero_label_forced": true,
+  "reconciliation": {
+    "records": 65549,
+    "included": 43282,
+    "excluded": 22267,
+    "total_spend_included": 2997176158.14,
+    "excluded_by_reason": {
+      "DUPLICATE": 21764,
+      "NOT_APPROVED": 315,
+      "CANCELLED": 188
+    }
+  },
+  "included_with_unresolved_amount_or_fx": 0,
+  "financial_flags": {
+    "SAME_CCY": 65549
+  },
+  "tax_flags": {
+    "NET_AS_SUPPLIED": 37029,
+    "OK": 21978,
+    "DEFAULTED": 6542
+  },
+  "date_flags": {
+    "date_flag": {
+      "MISSING": 43030,
+      "OK": 22519
+    }
+  },
+  "non_procurement_rules_hit": {},
+  "matching": {
+    "enabled": true,
+    "primary_live_rows": 37029,
+    "secondary_rows": 28520,
+    "secondary_live_rows": 28017,
+    "status_counts": {
+      "MATCHED_PRIMARY": 20476,
+      "UNMATCHED": 6756,
+      "EXPORT_DUPLICATE": 713,
+      "DUP_OF_PRIMARY": 571,
+      "AGGREGATE_MATCH": 4
+    },
+    "single_line_matches": 20476,
+    "aggregate_matches": 4,
+    "ambiguous": 0,
+    "dup_of_consumed_primary": 571,
+    "export_duplicates": 713,
+    "primary_lines_consumed": 20486,
+    "matched_score_quantiles_5_25_50": [
+      0.9925,
+      0.997,
+      1.0
+    ]
+  },
+  "suppliers": {
+    "supplier_identities_before": 198,
+    "distinct_name_keys": 198,
+    "distinct_vendor_ids": 93,
+    "suppliers_after": 198,
+    "merges_vendor_id_name_links": 93,
+    "merges_fuzzy_name": 0,
+    "merges_po_linked": 0,
+    "uncertain_pairs_not_merged": 13,
+    "rows_without_any_supplier_evidence": 0,
+    "uncertain_examples_count": 13
+  },
+  "items": {
+    "rows": 65549,
+    "distinct_description_keys": 10442,
+    "distinct_codes": 3139,
+    "generic_codes_ignored": 1,
+    "fuzzy_description_merges": 13405,
+    "cross_supplier_exact_merges": 1433,
+    "codeless_groups_attached_to_coded_items": 3839,
+    "items_after": 6703,
+    "rows_unspecified_item": 3
+  },
+  "classification": {
+    "rows": 43282,
+    "leaves": 40,
+    "embedding_models_used": [
+      "intfloat/multilingual-e5-base",
+      "intfloat/multilingual-e5-small",
+      "sentence-transformers/all-MiniLM-L6-v2",
+      "BAAI/bge-small-en-v1.5"
+    ],
+    "embedding_available": true,
+    "evidence_sharing": {
+      "fields": [
+        "supplier_key"
+      ],
+      "strength": 1.0
+    },
+    "seconds": 33.33,
+    "diagnostic_leaf_accuracy_vs_hidden_labels": 0.2402171271165843
+  },
+  "taxonomy_warnings": [],
+  "stage_seconds": {
+    "taxonomy": 0.04,
+    "ingest_clean": 9.1,
+    "exclusions": 0.31,
+    "transaction_matching": 31.32,
+    "supplier_resolution": 4.56,
+    "item_resolution": 5.73,
+    "classification": 33.34,
+    "write_output": 0.55
+  },
+  "supplier_resolution_vs_golden_keys": {
+    "rows": 37029,
+    "pairwise_precision": 1.0,
+    "pairwise_recall": 0.1,
+    "pairwise_f1": 0.1818,
+    "cluster_purity": 1.0,
+    "cluster_completeness": 0.5448,
+    "predicted_groups": 191,
+    "true_groups": 70
+  },
+  "item_resolution_vs_golden_keys": {
+    "rows": 21213,
+    "pairwise_precision": 0.9997,
+    "pairwise_recall": 0.3663,
+    "pairwise_f1": 0.5362,
+    "cluster_purity": 0.9997,
+    "cluster_completeness": 0.8668,
+    "predicted_groups": 3703,
+    "true_groups": 2426
+  },
+  "classification_vs_labels": {
+    "n": 37029,
+    "exact_leaf_accuracy": 0.2402171271165843,
+    "macro_f1": 0.1983161047125395,
+    "weighted_f1": 0.1885944465524571,
+    "L1_accuracy": 0.6540009181992492,
+    "L1_accuracy_spend_weighted": 0.7707755088412563,
+    "L2_accuracy": 0.30686759026708793,
+    "L2_accuracy_spend_weighted": 0.4008053167871751,
+    "L3_accuracy": 0.2402171271165843,
+    "L3_accuracy_spend_weighted": 0.30591550455716543,
+    "exact_leaf_accuracy_spend_weighted": 0.30591550455716543,
+    "mean_confidence": 0.4258424270605754,
+    "expected_calibration_error": 0.18655319991039057,
+    "share_conf_ge_0.8": 0.007426611574711713,
+    "accuracy_conf_ge_0.8": 0.6654545454545454,
+    "accuracy_conf_lt_0.5": 0.17043353582613288,
+    "labels_used_for_prediction": false,
+    "short_descriptions_share": 0.20999756947257556,
+    "short_accuracy": 0.2665895061728395,
+    "long_accuracy": 0.23320685057942775
+  },
+  "total_seconds": 96.17,
+  "output_file": "C:\\Users\\Admin\\AppData\\Local\\Temp\\a_zl.csv"
+}

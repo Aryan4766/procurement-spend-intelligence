@@ -1,0 +1,71 @@
+{
+  "supplier": {
+    "all_rows": {
+      "rows": 37029,
+      "pairwise_precision": 1.0,
+      "pairwise_recall": 0.1,
+      "pairwise_f1": 0.1818,
+      "cluster_purity": 1.0,
+      "cluster_completeness": 0.5448,
+      "predicted_groups": 191,
+      "true_groups": 70
+    },
+    "without_catch_all_bucket": {
+      "rows": 16138,
+      "pairwise_precision": 1.0,
+      "pairwise_recall": 1.0,
+      "pairwise_f1": 1.0,
+      "cluster_purity": 1.0,
+      "cluster_completeness": 1.0,
+      "predicted_groups": 69,
+      "true_groups": 69
+    },
+    "catch_all_bucket_share_of_labelled_rows": 0.5642
+  },
+  "item": {
+    "all_rows": {
+      "rows": 21213,
+      "pairwise_precision": 0.9997,
+      "pairwise_recall": 0.3663,
+      "pairwise_f1": 0.5362,
+      "cluster_purity": 0.9997,
+      "cluster_completeness": 0.8668,
+      "predicted_groups": 3703,
+      "true_groups": 2426
+    },
+    "without_catch_all_bucket": {
+      "rows": 18552,
+      "pairwise_precision": 1.0,
+      "pairwise_recall": 0.9871,
+      "pairwise_f1": 0.9935,
+      "cluster_purity": 1.0,
+      "cluster_completeness": 0.9704,
+      "predicted_groups": 2947,
+      "true_groups": 2425
+    },
+    "catch_all_bucket_share_of_labelled_rows": 0.1254
+  },
+  "supplier_diagnostics": {
+    "supplier_identities_before": 198,
+    "distinct_name_keys": 198,
+    "distinct_vendor_ids": 93,
+    "suppliers_after": 198,
+    "merges_vendor_id_name_links": 93,
+    "merges_fuzzy_name": 0,
+    "merges_po_linked": 0,
+    "uncertain_pairs_not_merged": 13,
+    "rows_without_any_supplier_evidence": 0,
+    "uncertain_examples_count": 13
+  },
+  "item_diagnostics": {
+    "rows": 65549,
+    "distinct_description_keys": 10442,
+    "distinct_codes": 3139,
+    "generic_codes_ignored": 1,
+    "fuzzy_description_merges": 13405,
+    "cross_supplier_exact_merges": 1433,
+    "codeless_groups_attached_to_coded_items": 3839,
+    "items_after": 6703,
+    "rows_unspecified_item": 3
+  }
+}

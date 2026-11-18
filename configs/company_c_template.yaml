@@ -1,0 +1,64 @@
+# TEMPLATE for a new company (the blind-test "Company C"): copy to company_c.yaml and fill in the <...> values.
+# Everything below is configuration; no code changes are needed. Delete options that do not apply.
+extends: common.yaml                 # generic status words + generic non-procurement rules (taxes, intercompany, ...)
+company_id: C
+reporting_currency: USD              # brief: B and C report in USD
+data_dir: ../../company_C            # overridable with --data-dir
+
+taxonomy:
+  file: <taxonomy_file>.csv
+  level_columns: [<level1_col>, <level2_col>, <level3_col>, <level4_col>]    # 1 to 4 columns; blanks where the tree ends
+
+sources:
+  - name: ap
+    role: standalone                 # one invoice-line file -> standalone (no cross-system matching)
+    file: <invoice_lines_file>.csv
+    id_column: <line_id_col>
+    record_id_template: "{id}"       # B and C: the line id itself
+    fields:                          # logical name: csv column (a list means "first non-blank" / concatenated for description)
+      description: <description_col>               # or [col1, col2]
+      amount: <amount_col>
+      date: <posting_or_invoice_date_col>
+      # invoice_date: <col>                         # optional second date (used for the FX month first)
+      # supplier_id: <vendor_id_col>
+      # supplier_name: <vendor_name_col>
+      # item_code: <material_col>
+      # quantity: <qty_col>
+      # po: <po_col>
+      # invoice_number: <invoice_no_col>
+      # status: <status_col>                        # approved/paid/cancelled/rejected/on hold ...
+      # account: <gl_code_col>
+      # account_desc: <gl_description_col>          # strongly used for intercompany / tax detection
+      # doc_type: <document_type_col>
+      # supplier_type: <supplier_group_col>
+      # vat_rate: <vat_col>                         # only with basis: gross
+    amount:
+      basis: net                      # 'gross' removes VAT at the rate in vat_rate (blank -> vat_default)
+      # vat_default: 0.15
+      currency_column: <currency_col> # or: currency: USD   (fixed)
+      # rate_column: <line_fx_rate_col>             # units of line currency per 1 reporting unit
+      fx_date_fields: [invoice_date, date]
+    date_formats: auto                # or an explicit list, e.g. ["%Y-%m-%d", "%d/%m/%Y"]
+    # date_sanity: {reference_field: date, max_gap_days: 730}
+    # duplicate_key: [<col>, <col>, ...]          # identical re-exports inside the file -> DUPLICATE (first kept)
+    # status: {approved: [approved, paid], cancelled: [cancelled]}
+
+# fx:                                 # needed when currency_column holds non-reporting currencies
+#   file: <fx_file>.csv
+#   currency_column: currency
+#   month_column: month
+#   rate_column: units_per_usd
+#   semantics: units_per_reporting
+
+# non_procurement:                    # add company-specific rules on top of the generic ones in common.yaml
+#   rules:
+#     - {name: my_rule, field: supplier_type, values: ["1234"]}
+#     - {name: my_text_rule, fields: [description], regex: 'royalt|dividend'}
+
+entity_resolution:
+  supplier: {vendor_id_scope: global}   # or per_system when ids are only unique inside one ERP
+  item: {use_item_code: true}
+
+classification:
+  mode: auto                        # no labels file -> zero-label mode automatically
+  fallback_fields: [account_desc]   # text used when a description is blank or says nothing

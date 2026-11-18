@@ -1,0 +1,156 @@
+{
+  "company": "A",
+  "generated_utc": "2026-11-18T09:56:03Z",
+  "records": 65549,
+  "mode": "supervised+semantic",
+  "zero_label_forced": false,
+  "reconciliation": {
+    "records": 65549,
+    "included": 43282,
+    "excluded": 22267,
+    "total_spend_included": 2997176158.14,
+    "excluded_by_reason": {
+      "DUPLICATE": 21764,
+      "NOT_APPROVED": 315,
+      "CANCELLED": 188
+    }
+  },
+  "included_with_unresolved_amount_or_fx": 0,
+  "financial_flags": {
+    "SAME_CCY": 65549
+  },
+  "tax_flags": {
+    "NET_AS_SUPPLIED": 37029,
+    "OK": 21978,
+    "DEFAULTED": 6542
+  },
+  "date_flags": {
+    "date_flag": {
+      "MISSING": 43030,
+      "OK": 22519
+    }
+  },
+  "non_procurement_rules_hit": {},
+  "matching": {
+    "enabled": true,
+    "primary_live_rows": 37029,
+    "secondary_rows": 28520,
+    "secondary_live_rows": 28017,
+    "status_counts": {
+      "MATCHED_PRIMARY": 20476,
+      "UNMATCHED": 6756,
+      "EXPORT_DUPLICATE": 713,
+      "DUP_OF_PRIMARY": 571,
+      "AGGREGATE_MATCH": 4
+    },
+    "single_line_matches": 20476,
+    "aggregate_matches": 4,
+    "ambiguous": 0,
+    "dup_of_consumed_primary": 571,
+    "export_duplicates": 713,
+    "primary_lines_consumed": 20486,
+    "matched_score_quantiles_5_25_50": [
+      0.9925,
+      0.997,
+      1.0
+    ]
+  },
+  "suppliers": {
+    "supplier_identities_before": 198,
+    "distinct_name_keys": 198,
+    "distinct_vendor_ids": 93,
+    "suppliers_after": 198,
+    "merges_vendor_id_name_links": 93,
+    "merges_fuzzy_name": 0,
+    "merges_po_linked": 0,
+    "uncertain_pairs_not_merged": 13,
+    "rows_without_any_supplier_evidence": 0,
+    "uncertain_examples_count": 13
+  },
+  "items": {
+    "rows": 65549,
+    "distinct_description_keys": 10442,
+    "distinct_codes": 3139,
+    "generic_codes_ignored": 1,
+    "fuzzy_description_merges": 13405,
+    "cross_supplier_exact_merges": 1433,
+    "codeless_groups_attached_to_coded_items": 3839,
+    "items_after": 6703,
+    "rows_unspecified_item": 3
+  },
+  "classification": {
+    "rows": 43282,
+    "leaves": 40,
+    "embedding_models_used": [
+      "intfloat/multilingual-e5-base",
+      "intfloat/multilingual-e5-small",
+      "sentence-transformers/all-MiniLM-L6-v2",
+      "BAAI/bge-small-en-v1.5"
+    ],
+    "embedding_available": true,
+    "supervised_weight": 1.0,
+    "labelled_rows": 37029,
+    "cv_folds": 5,
+    "oof_accuracy_supervised_only": 0.9271111831267385,
+    "oof_accuracy_prior_only": 0.205163520483945,
+    "oof_accuracy_blend": 0.9271111831267385,
+    "confidence_calibration": "isotonic regression on out-of-fold correctness",
+    "seconds": 549.39,
+    "diagnostic_leaf_accuracy_vs_hidden_labels": 0.924545626400929
+  },
+  "taxonomy_warnings": [],
+  "stage_seconds": {
+    "taxonomy": 0.02,
+    "ingest_clean": 8.52,
+    "exclusions": 0.3,
+    "transaction_matching": 28.4,
+    "supplier_resolution": 4.99,
+    "item_resolution": 5.12,
+    "classification": 549.39,
+    "write_output": 0.56
+  },
+  "supplier_resolution_vs_golden_keys": {
+    "rows": 37029,
+    "pairwise_precision": 1.0,
+    "pairwise_recall": 0.1,
+    "pairwise_f1": 0.1818,
+    "cluster_purity": 1.0,
+    "cluster_completeness": 0.5448,
+    "predicted_groups": 191,
+    "true_groups": 70
+  },
+  "item_resolution_vs_golden_keys": {
+    "rows": 21213,
+    "pairwise_precision": 0.9997,
+    "pairwise_recall": 0.3663,
+    "pairwise_f1": 0.5362,
+    "cluster_purity": 0.9997,
+    "cluster_completeness": 0.8668,
+    "predicted_groups": 3703,
+    "true_groups": 2426
+  },
+  "classification_vs_labels": {
+    "n": 37029,
+    "exact_leaf_accuracy": 0.924545626400929,
+    "macro_f1": 0.7698147218117367,
+    "weighted_f1": 0.9240114850382349,
+    "L1_accuracy": 0.9839045072780793,
+    "L1_accuracy_spend_weighted": 0.976122781871994,
+    "L2_accuracy": 0.94482702746496,
+    "L2_accuracy_spend_weighted": 0.9458593655108736,
+    "L3_accuracy": 0.924545626400929,
+    "L3_accuracy_spend_weighted": 0.8982183486640882,
+    "exact_leaf_accuracy_spend_weighted": 0.8982183486640882,
+    "mean_confidence": 0.9232455642874504,
+    "expected_calibration_error": 0.00130006211347854,
+    "share_conf_ge_0.8": 0.9507413108644576,
+    "accuracy_conf_ge_0.8": 0.9428774321829285,
+    "accuracy_conf_lt_0.5": 0.3751763046544429,
+    "labels_used_for_prediction": true,
+    "short_descriptions_share": 0.20999756947257556,
+    "short_accuracy": 0.9749228395061729,
+    "long_accuracy": 0.9111544115133491
+  },
+  "total_seconds": 608.96,
+  "output_file": "outputs\\aryan_sharma__A.csv"
+}

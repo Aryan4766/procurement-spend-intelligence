@@ -1,0 +1,84 @@
+# Company B - metal packaging manufacturer, USD, eight ERPs (JDE + SAP), 25 currencies, vendor IDs only.
+extends: common.yaml
+company_id: B
+reporting_currency: USD
+data_dir: ../../company_B
+
+taxonomy:
+  file: taxonomy_B.csv
+  level_columns: [category_l1, category_l2, category_l3]
+
+labels:
+  file: seed_labels.csv
+  id_column: line_id
+  level_columns: [category_l1, category_l2, category_l3]
+  include_column: include
+  exclusion_column: exclusion_reason
+  label_quality: noisy            # an analyst labelled these quickly: validated, never trusted blindly
+
+sources:
+  - name: ap
+    role: standalone
+    file: invoice_lines.csv
+    id_column: line_id
+    record_id_template: "{id}"
+    fields:
+      description: line_description
+      supplier_id: vendor_id
+      item_code: material_number
+      quantity: quantity
+      date: posting_date
+      invoice_date: invoice_date
+      po: po_number
+      po_item: po_line
+      invoice_number: invoice_number
+      invoice_line: invoice_line
+      amount: line_amount
+      account: gl_account
+      account_desc: gl_account_description
+      supplier_type: supplier_type
+      doc_type: document_type
+      system: source_system
+      cost_centre: cost_centre
+    context_fields:
+      region: region
+      plant: plant
+    amount:
+      basis: net                  # AP line amounts carry no VAT column; treated as the supplier-invoiced amount
+      currency_column: currency
+      rate_column: currency_rate  # units of line currency per 1 USD
+      fx_date_fields: [invoice_date, date]   # brief: monthly rate "for the invoice month"; posting month as fallback
+    date_formats: ["%Y-%m-%d"]
+    date_sanity:
+      reference_field: date
+      max_gap_days: 730           # an invoice dated 2018 / 2027 for a 2024 posting is a broken date
+    # The same invoice line exported twice (only due date / account text differ)
+    duplicate_key: [source_system, invoice_number, invoice_line, vendor_id, po_number, po_line, material_number,
+                    quantity, currency, line_amount, invoice_date]
+
+fx:
+  file: fx_rates_usd.csv
+  currency_column: currency
+  month_column: month
+  rate_column: units_per_usd
+  semantics: units_per_reporting
+
+non_procurement:
+  rules:
+    # supplier-type codes that seeds show are always intercompany
+    - name: intercompany_supplier_type
+      field: supplier_type
+      values: ["2742", "5406"]
+
+entity_resolution:
+  supplier:
+    vendor_id_scope: global       # one vendor id = one supplier across ERPs (see DECISIONS.md for the evidence)
+  item:
+    desc_threshold: 93
+    use_item_code: true
+    generic_codes_min_lines: 400  # a material code on >400 lines with many descriptions is a placeholder, not an item
+
+classification:
+  mode: auto
+  context_fields: [account_desc, supplier_key]
+  fallback_fields: [account_desc]

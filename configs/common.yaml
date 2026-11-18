@@ -1,0 +1,37 @@
+# Defaults shared by every company. Company configs `extends: common.yaml` and override what differs.
+# NOTHING here names a business category; only generic vocabulary for statuses and non-procurement spend.
+
+exclusion:
+  precedence: [CANCELLED, NOT_APPROVED, NON_PROCUREMENT, DUPLICATE]
+
+status_defaults:
+  approved: [approved, paid, posted, cleared, complete, completed, released, settled, closed, final]
+  cancelled: [cancelled, canceled, void, voided, annulled, deleted, reversed]
+  blank_status: approved        # a source with no / blank status is treated as approved
+
+non_procurement:
+  use_defaults: true
+  # Generic rules. They only look at fields a source maps (account text, document text, descriptions).
+  default_rules:
+    - name: intercompany_account
+      fields: [account_desc, account_name, account_type, counterparty]
+      regex: '(?<![A-Za-z])(I/C|IC\d{0,3}|inter[ -]?co(mpany)?|intra[ -]?company|affiliate|related part(y|ies))(?![A-Za-z])'
+    - name: tax_line
+      fields: [description]
+      regex: '^\s*(accrued[\s\-:]*)?(state|local|rtd|sales|use|property|withholding|input|output|excise|payroll|income|franchise|import|customs|gst|vat|hst|pst|qst|iva)\b[^\-]{0,30}?\b(tax(es)?|gst|vat|duty|duties)\b(?!\s*(consult|service|advis|work|prep|audit))'
+    - name: royalty_or_revenue
+      fields: [description, account_desc]
+      regex: '\b(royalt(y|ies)|dividends?|(sales|service)\s+revenue|revenue\s+share|licen[cs]e\s+fee\s+(income|revenue))\b'
+    - name: financing_cost
+      fields: [description, account_desc]
+      regex: '\b(interest\s+(expense|charges?|on\s+loan|payment)|loan\s+(repayment|interest)|finance\s+charges?|financing\s+costs?)\b'
+    - name: partner_billing
+      fields: [description, account_desc]
+      regex: '\b(partner\s+billing|joint\s+venture\s+billing|jib\s+billing|cash\s+call)\b'
+
+
+classification:
+  evidence_sharing: {fields: [supplier_key], strength: 1.0}   # label-free: a supplier's lines vote on the level-1 branch
+  # Zero-label confidence model: logistic regression fitted on the hidden-label runs of the two development companies
+  # (python -m src.evaluation.fit_confidence). Reused unchanged on a company without labels.
+  confidence_coefficients: {intercept: -3.649, top: 4.889, margin: 0.104, agree: -0.626, info: 0.85}
