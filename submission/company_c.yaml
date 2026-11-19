@@ -1,0 +1,48 @@
+# Company C (blind test): one invoice-line file, amounts already in USD, four-level category tree, no labels.
+# Configuration only - the frozen pipeline is used unchanged:
+#   python main.py --config submission/company_c.yaml --data-dir <C folder> --out submission/aryan_sharma__C.csv
+extends: ../configs/common.yaml      # generic status words + generic non-procurement rules
+company_id: C
+reporting_currency: USD
+
+taxonomy:
+  file: category_tree_C.csv
+  level_columns: [level_1, level_2, level_3, level_4]
+
+sources:
+  - name: ap
+    role: standalone
+    file: invoice_lines.csv
+    id_column: line_id
+    record_id_template: "{id}"
+    fields:
+      description: [line_description, product_service_description]
+      supplier_name: supplier_name
+      quantity: quantity
+      date: invoice_date
+      invoice_number: invoice_number
+      invoice_line: invoice_line
+      amount: line_amount_usd
+      status: status
+      account_desc: gl_account_description
+    amount:
+      basis: net                  # no tax column: amounts are treated as net
+      currency: USD               # amounts are already in USD (rate_usd is the rate that was applied upstream)
+    date_formats: ["%m/%d/%Y"]    # every invoice_date parses as month/day/year
+    # Same supplier, date, line text, amount, quantity, line number and invoice total under a different invoice number
+    # = the invoice line was submitted twice.
+    duplicate_key: [supplier_name, invoice_date, line_description, line_amount_usd, invoice_line, quantity, invoice_total_usd]
+
+non_procurement:
+  rules:
+    # tax accounts (generic royalty / intercompany / tax-text rules come from common.yaml)
+    - {name: tax_accounts, fields: [account_desc], regex: '\b(ad valorem|severance)\s+tax'}
+
+entity_resolution:
+  supplier: {vendor_id_scope: global}   # names only; vendor ids do not exist in this file
+  item: {use_item_code: true}
+
+classification:
+  mode: auto                      # no labels -> zero-label mode
+  context_fields: [account_desc, supplier_key]
+  fallback_fields: [account_desc]
